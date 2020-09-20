@@ -1,0 +1,31 @@
+<script type="application/javascript">
+  var deletePost = function (id) {
+    console.log(id);
+    fetch("posts/" + id, { method: "delete" }).then(result => window.location = window.location);
+  }
+</script>
+​
+<h3>New Post</h3>
+<form id="makePost" name="makePost" method="POST" action="/posts/">
+  <div>
+    <label for="postTitle">Title: </label>
+    <input type="text" name="postTitle" required>
+  </div>
+  <div>
+    <label for="postBody">Body: </label>
+    <input type="text" name="postBody" required>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+​
+<hr />
+<h3>Posts</h3>
+​
+{{#each posts}}
+<h3>
+  {{ PostTitle }} : {{ PostBody }} <button onClick="deletePost({{PostId}})">delete</button> <a
+    href="posts/{{PostId}}">Edit</a>
+</h3>
+{{/ each}}
